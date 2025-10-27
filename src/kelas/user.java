@@ -3,7 +3,8 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package kelas;
-
+import java.sql.*;
+import javax.swing.JOptionPane;
 /**
  *
  * @author ASUS
@@ -12,6 +13,19 @@ public class user {
     
     private String userName, userEmail, userPassword, userFullName;
     private byte userStatus;
+    
+    private Connection cnVar;
+    private PreparedStatement psVar;
+    private Statement stVar;
+    private ResultSet rsVar;
+    private String query;
+
+    
+    public user() {
+        koneksi koneksiDB = new koneksi();
+        cnVar = koneksiDB.getConnection();
+    }    
+    
 
     public String getUserName() {
         return userName;
@@ -54,6 +68,77 @@ public class user {
     }
     
     
+    public ResultSet loadData(){
+        
+        try {
+            query = "SELECT * FROM user";
+            
+            stVar = cnVar.createStatement();
+            rsVar = stVar.executeQuery(query);
+            
+        } catch (SQLException sQLException) {
+            JOptionPane.showMessageDialog(null, "Error : " + sQLException.getMessage());
+        }
+        return rsVar;
+    }
+    
+    
+    public void saveData(){
+        
+        try {
+            query = "INSERT INTO user VALUES (?, ?, MD5(?), ?, ?)";
+            
+            psVar = cnVar.prepareStatement(query);
+            psVar.setString(1, this.userName);
+            psVar.setString(2, this.userEmail);
+            psVar.setString(3, this.userPassword);
+            psVar.setString(4, this.userFullName);
+            psVar.setByte(5, this.userStatus);
+            psVar.executeUpdate();
+            
+            JOptionPane.showMessageDialog(null, "Data berhasil ditambahkan");
+            
+        } catch (SQLException sQLException) {
+            JOptionPane.showMessageDialog(null, "Error : " + sQLException.getMessage());
+        }
+    }
+    
+    
+    public void deleteData(){
+        
+        try {
+            query = "DELETE FROM user WHERE userName = ?";
+            
+            psVar = cnVar.prepareStatement(query);
+            psVar.setString(1, this.userName);
+            psVar.executeUpdate();
+            
+            JOptionPane.showMessageDialog(null, "Data berhasil dihapus");
+            
+        } catch (SQLException sQLException) {
+            JOptionPane.showMessageDialog(null, "Error : " + sQLException.getMessage());
+        }
+    }
+    
+    
+    public boolean loginApp(){
+        
+        try {
+            query = "SELECT * FROM user WHERE userName = ? AND userPassword = MD5(?)";
+            
+            psVar = cnVar.prepareStatement(query);
+            psVar.setString(1, this.userName);
+            psVar.setString(2, this.userPassword);
+            
+            rsVar = psVar.executeQuery();
+            
+            return rsVar.next();
+            
+        } catch (SQLException sQLException) {
+            JOptionPane.showMessageDialog(null, "Error : " + sQLException.getMessage());
+            return false;
+        }
+    }
     
     
 }

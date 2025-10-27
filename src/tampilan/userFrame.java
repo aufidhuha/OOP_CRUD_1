@@ -4,6 +4,11 @@
  */
 package tampilan;
 
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import kelas.user;
+import java.sql.*;
+
 /**
  *
  * @author ASUS
@@ -15,6 +20,47 @@ public class userFrame extends javax.swing.JFrame {
      */
     public userFrame() {
         initComponents();
+        reset();
+        loadData();
+    }
+
+    void reset() {
+        txtUsername.setText(null);
+        txtPassword.setText(null);
+        txtEmail.setText(null);
+        txtFullName.setText(null);
+        cbStatus.setSelectedIndex(0);
+    }
+
+    void loadData() {
+
+        DefaultTableModel model = new DefaultTableModel();
+        user userData = new user();
+
+        model.addColumn("Username");
+        model.addColumn("Email");
+        model.addColumn("Password");
+        model.addColumn("Full Name");
+        model.addColumn("Status");
+
+        try {
+            ResultSet rsVar = userData.loadData();
+
+            while (rsVar.next()) {
+                String username = rsVar.getString("userName");
+                String email = rsVar.getString("userEmail");
+                String password = rsVar.getString("userPassword");
+                String fullName = rsVar.getString("userFullName");
+                byte status = rsVar.getByte("userStatus");
+
+                Object data[] = {username, email, password, fullName, status};
+                model.addRow(data);
+            }
+
+        } catch (SQLException sQLException) {
+            JOptionPane.showMessageDialog(null, "Error : " + sQLException.getMessage());
+        }
+        tableUser.setModel(model);
     }
 
     /**
@@ -143,17 +189,37 @@ public class userFrame extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tableUser.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tableUserMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tableUser);
 
         buttonTambah.setText("TAMBAH");
+        buttonTambah.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonTambahActionPerformed(evt);
+            }
+        });
 
         buttonUbah.setText("UBAH");
 
         buttonHapus.setText("HAPUS");
+        buttonHapus.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonHapusActionPerformed(evt);
+            }
+        });
 
         buttonReset.setText("RESET");
 
         buttonKembali.setText("KEMBALI");
+        buttonKembali.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonKembaliActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -214,6 +280,78 @@ public class userFrame extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void buttonKembaliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonKembaliActionPerformed
+        // TODO add your handling code here:
+        dispose();
+        new dashboardFrame().setVisible(true);
+    }//GEN-LAST:event_buttonKembaliActionPerformed
+
+    private void buttonTambahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonTambahActionPerformed
+        // TODO add your handling code here:
+        if (txtUsername.getText().isBlank() || txtEmail.getText().isBlank() || txtPassword.getText().isBlank() || txtFullName.getText().isBlank() || (cbStatus.getSelectedItem() == null)) {
+            JOptionPane.showMessageDialog(null, "Harap mengisi data secara keseluruhan");
+            return;
+        }
+
+        user userTambah = new user();
+
+        userTambah.setUserName(txtUsername.getText());
+        userTambah.setUserEmail(txtEmail.getText());
+        userTambah.setUserPassword(txtPassword.getText());
+        userTambah.setUserFullName(txtFullName.getText());
+
+        String status = cbStatus.getSelectedItem().toString();
+        byte statusByte;
+
+        if (status.equalsIgnoreCase("Active")) {
+            statusByte = 1;
+        } else {
+            statusByte = 0;
+        }
+
+        userTambah.setUserStatus(statusByte);
+
+        userTambah.saveData();
+
+        reset();
+        loadData();
+    }//GEN-LAST:event_buttonTambahActionPerformed
+
+    private void buttonHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonHapusActionPerformed
+        // TODO add your handling code here:
+        if (txtUsername.getText().isBlank() || txtEmail.getText().isBlank() || txtPassword.getText().isBlank() || txtFullName.getText().isBlank() || (cbStatus.getSelectedItem() == null)) {
+            JOptionPane.showMessageDialog(null, "Harap memilih data yang ingin dihapus");
+            return;
+        }
+
+        user userTambah = new user();
+
+        userTambah.setUserName(txtUsername.getText());
+
+        userTambah.deleteData();
+
+        reset();
+        loadData();
+    }//GEN-LAST:event_buttonHapusActionPerformed
+
+    private void tableUserMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableUserMouseClicked
+        // TODO add your handling code here:
+        int choiceRow = tableUser.getSelectedRow();
+
+        String username = tableUser.getValueAt(choiceRow, 0).toString();
+        String email = tableUser.getValueAt(choiceRow, 1).toString();
+        String password = tableUser.getValueAt(choiceRow, 2).toString();
+        String fullName = tableUser.getValueAt(choiceRow, 3).toString();
+        byte status = Byte.parseByte(tableUser.getValueAt(choiceRow, 4).toString());
+
+        txtUsername.setText(username);
+        txtEmail.setText(email);
+        txtPassword.setText(password);
+        txtFullName.setText(fullName);
+        cbStatus.setSelectedItem(status);
+
+    }//GEN-LAST:event_tableUserMouseClicked
 
     /**
      * @param args the command line arguments

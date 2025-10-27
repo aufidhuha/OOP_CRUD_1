@@ -6,7 +6,7 @@
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
-    <SyntheticProperty name="generateCenter" type="boolean" value="false"/>
+    <SyntheticProperty name="generateCenter" type="boolean" value="true"/>
   </SyntheticProperties>
   <AuxValues>
     <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
@@ -120,6 +120,9 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="KEMBALI"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonKembaliActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel1">
           <Properties>
@@ -150,10 +153,10 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="21" pref="21" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="txtNamaProduk1" alignment="0" pref="269" max="32767" attributes="0"/>
+                          <Component id="txtNamaCategory" alignment="0" pref="269" max="32767" attributes="0"/>
                           <Component id="jLabel7" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel8" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="txtIDProduk1" alignment="0" max="32767" attributes="0"/>
+                          <Component id="txtIDCategory" alignment="0" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace pref="55" max="32767" attributes="0"/>
                   </Group>
@@ -165,11 +168,11 @@
                       <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
                       <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
-                      <Component id="txtIDProduk1" min="-2" pref="28" max="-2" attributes="0"/>
+                      <Component id="txtIDCategory" min="-2" pref="28" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="13" max="-2" attributes="0"/>
-                      <Component id="txtNamaProduk1" min="-2" pref="28" max="-2" attributes="0"/>
+                      <Component id="txtNamaCategory" min="-2" pref="28" max="-2" attributes="0"/>
                       <EmptySpace pref="241" max="32767" attributes="0"/>
                   </Group>
               </Group>
@@ -192,7 +195,7 @@
                 <Property name="text" type="java.lang.String" value="NAMA CATEGORY"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="txtIDProduk1">
+            <Component class="javax.swing.JTextField" name="txtIDCategory">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="cc" green="cc" red="cc" type="rgb"/>
@@ -202,7 +205,7 @@
                 </Property>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="txtNamaProduk1">
+            <Component class="javax.swing.JTextField" name="txtNamaCategory">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="cc" green="cc" red="cc" type="rgb"/>

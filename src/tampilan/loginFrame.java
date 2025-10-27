@@ -3,7 +3,8 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package tampilan;
-
+import javax.swing.JOptionPane;
+import kelas.user;
 /**
  *
  * @author ASUS
@@ -52,6 +53,11 @@ public class loginFrame extends javax.swing.JFrame {
         jButton1.setBackground(new java.awt.Color(0, 102, 0));
         jButton1.setForeground(new java.awt.Color(255, 255, 255));
         jButton1.setText("LOGIN");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -104,6 +110,29 @@ public class loginFrame extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        user userLog = new user();
+        
+        if (txtUsername.getText().isBlank() || txtPassword.getText().isBlank()) {
+            JOptionPane.showMessageDialog(null, "Username dan Password tidak boleh kosong");
+        } else {
+            userLog.setUserName(txtUsername.getText());
+            userLog.setUserPassword(txtPassword.getText());
+            
+            boolean loginSuccess = userLog.loginApp();
+            
+            if (loginSuccess) {
+        dispose();
+        new dashboardFrame().setVisible(true);
+                
+            } else {
+            JOptionPane.showMessageDialog(null, "Username atau Password salah, Silahkan coba lagi");
+            }
+        }
+        
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments

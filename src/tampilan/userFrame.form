@@ -282,6 +282,9 @@
                   </Table>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tableUserMouseClicked"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>
@@ -289,6 +292,9 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="TAMBAH"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonTambahActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="buttonUbah">
           <Properties>
@@ -299,6 +305,9 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="HAPUS"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonHapusActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="buttonReset">
           <Properties>
@@ -309,6 +318,9 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="KEMBALI"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonKembaliActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>

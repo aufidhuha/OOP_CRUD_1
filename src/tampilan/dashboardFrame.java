@@ -134,20 +134,25 @@ public class dashboardFrame extends javax.swing.JFrame {
 
     private void miLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miLogoutActionPerformed
         // TODO add your handling code here:
+        dispose();
+        new loginFrame().setVisible(true);
     }//GEN-LAST:event_miLogoutActionPerformed
 
     private void mProductMenuSelected(javax.swing.event.MenuEvent evt) {//GEN-FIRST:event_mProductMenuSelected
         // TODO add your handling code here:
+        dispose();
         new productFrame().setVisible(true);
     }//GEN-LAST:event_mProductMenuSelected
 
     private void miCategoryMenuSelected(javax.swing.event.MenuEvent evt) {//GEN-FIRST:event_miCategoryMenuSelected
         // TODO add your handling code here:
+        dispose();
         new categoryFrame().setVisible(true);
     }//GEN-LAST:event_miCategoryMenuSelected
 
     private void miUserMenuSelected(javax.swing.event.MenuEvent evt) {//GEN-FIRST:event_miUserMenuSelected
         // TODO add your handling code here:
+        dispose();
         new userFrame().setVisible(true);
     }//GEN-LAST:event_miUserMenuSelected
 

@@ -60,6 +60,11 @@ public class productFrame extends javax.swing.JFrame {
         buttonReset.setText("RESET");
 
         buttonKembali.setText("KEMBALI");
+        buttonKembali.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonKembaliActionPerformed(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 0, 0));
@@ -214,7 +219,14 @@ public class productFrame extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void buttonKembaliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonKembaliActionPerformed
+        // TODO add your handling code here:
+        dispose();
+        new dashboardFrame().setVisible(true);
+    }//GEN-LAST:event_buttonKembaliActionPerformed
 
     /**
      * @param args the command line arguments

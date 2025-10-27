@@ -4,6 +4,12 @@
  */
 package tampilan;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import kelas.category;
+
 /**
  *
  * @author ASUS
@@ -15,6 +21,36 @@ public class categoryFrame extends javax.swing.JFrame {
      */
     public categoryFrame() {
         initComponents();
+        reset();
+        loadData();
+    }
+    
+    void reset(){
+        txtIDCategory.setText(null);
+        txtNamaCategory.setText(null);
+    }
+    
+    void loadData(){
+        DefaultTableModel model = new DefaultTableModel();
+        category categoryData = new category();
+        
+        model.addColumn("ID Category");
+        model.addColumn("Nama Category");
+        
+        try {
+            ResultSet rsVar = categoryData.loadData();
+            
+            while (rsVar.next()) {
+                int id = rsVar.getInt("categoryId");
+                String nama = rsVar.getString("categoryNama");
+                
+                Object data[] = {id, nama};
+                model.addRow(data);
+            }
+        } catch (SQLException sQLException) {
+            JOptionPane.showMessageDialog(null, "Error : " + sQLException.getMessage());
+        }
+        tableCategory.setModel(model);
     }
 
     /**
@@ -36,8 +72,8 @@ public class categoryFrame extends javax.swing.JFrame {
         jPanel3 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        txtIDProduk1 = new javax.swing.JTextField();
-        txtNamaProduk1 = new javax.swing.JTextField();
+        txtIDCategory = new javax.swing.JTextField();
+        txtNamaCategory = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         tableCategory = new javax.swing.JTable();
 
@@ -54,6 +90,11 @@ public class categoryFrame extends javax.swing.JFrame {
         buttonReset.setText("RESET");
 
         buttonKembali.setText("KEMBALI");
+        buttonKembali.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonKembaliActionPerformed(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 0, 0));
@@ -68,11 +109,11 @@ public class categoryFrame extends javax.swing.JFrame {
         jLabel8.setForeground(new java.awt.Color(0, 0, 0));
         jLabel8.setText("NAMA CATEGORY");
 
-        txtIDProduk1.setBackground(new java.awt.Color(204, 204, 204));
-        txtIDProduk1.setForeground(new java.awt.Color(0, 0, 0));
+        txtIDCategory.setBackground(new java.awt.Color(204, 204, 204));
+        txtIDCategory.setForeground(new java.awt.Color(0, 0, 0));
 
-        txtNamaProduk1.setBackground(new java.awt.Color(204, 204, 204));
-        txtNamaProduk1.setForeground(new java.awt.Color(0, 0, 0));
+        txtNamaCategory.setBackground(new java.awt.Color(204, 204, 204));
+        txtNamaCategory.setForeground(new java.awt.Color(0, 0, 0));
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -81,10 +122,10 @@ public class categoryFrame extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(21, 21, 21)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(txtNamaProduk1, javax.swing.GroupLayout.DEFAULT_SIZE, 269, Short.MAX_VALUE)
+                    .addComponent(txtNamaCategory, javax.swing.GroupLayout.DEFAULT_SIZE, 269, Short.MAX_VALUE)
                     .addComponent(jLabel7)
                     .addComponent(jLabel8)
-                    .addComponent(txtIDProduk1))
+                    .addComponent(txtIDCategory))
                 .addContainerGap(55, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
@@ -93,11 +134,11 @@ public class categoryFrame extends javax.swing.JFrame {
                 .addGap(34, 34, 34)
                 .addComponent(jLabel7)
                 .addGap(8, 8, 8)
-                .addComponent(txtIDProduk1, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtIDCategory, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel8)
                 .addGap(13, 13, 13)
-                .addComponent(txtNamaProduk1, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtNamaCategory, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(241, Short.MAX_VALUE))
         );
 
@@ -171,7 +212,14 @@ public class categoryFrame extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void buttonKembaliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonKembaliActionPerformed
+        // TODO add your handling code here:
+        dispose();
+        new dashboardFrame().setVisible(true);
+    }//GEN-LAST:event_buttonKembaliActionPerformed
 
     /**
      * @param args the command line arguments
@@ -215,25 +263,14 @@ public class categoryFrame extends javax.swing.JFrame {
     private javax.swing.JButton buttonReset;
     private javax.swing.JButton buttonTambah;
     private javax.swing.JButton buttonUbah;
-    private javax.swing.JComboBox<String> cbKategoriProduk;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tableCategory;
-    private javax.swing.JTextField txtDeskripsi;
-    private javax.swing.JTextField txtHarga;
-    private javax.swing.JTextField txtIDProduk;
-    private javax.swing.JTextField txtIDProduk1;
-    private javax.swing.JTextField txtNamaProduk;
-    private javax.swing.JTextField txtNamaProduk1;
+    private javax.swing.JTextField txtIDCategory;
+    private javax.swing.JTextField txtNamaCategory;
     // End of variables declaration//GEN-END:variables
 }
