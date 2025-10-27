@@ -4,6 +4,10 @@
  */
 package tampilan;
 
+import javax.swing.table.DefaultTableModel;
+import java.sql.*;
+import javax.swing.JOptionPane;
+import kelas.product;
 /**
  *
  * @author ASUS
@@ -15,8 +19,47 @@ public class productFrame extends javax.swing.JFrame {
      */
     public productFrame() {
         initComponents();
+        loadData();
+        reset();
     }
-
+    
+    void reset(){
+        txtIDProduk.setText(null);
+        txtNamaProduk.setText(null);
+        txtDeskripsi.setText(null);
+        txtHarga.setText(null);
+        cbKategoriProduk.setSelectedItem(null);
+    }
+    
+    void loadData(){
+        DefaultTableModel model = new DefaultTableModel();
+        product productData = new product();
+        
+        model.addColumn("ID Produk");
+        model.addColumn("Nama Produk");
+        model.addColumn("Kategori Produk");
+        model.addColumn("Deskripsi Produk");
+        model.addColumn("Harga Produk");
+        
+        ResultSet rsVar = productData.showProduct();
+        try {
+            
+            while (rsVar.next()) {                
+                int id = rsVar.getInt("productId");
+                String name = rsVar.getString("productName");
+                String category = rsVar.getString("productCategory");
+                String description = rsVar.getString("productDescription");
+                int price = rsVar.getInt("productPrice");
+                
+                Object[] data = {id, name, category, description, price};
+                model.addRow(data);
+            }
+            
+        } catch (SQLException sQLException) {
+            JOptionPane.showMessageDialog(null, "Error : " + sQLException.getMessage());
+        }
+        tablePRoduk.setModel(model);
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

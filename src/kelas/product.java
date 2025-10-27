@@ -4,6 +4,9 @@
  */
 package kelas;
 
+import java.sql.*;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author ASUS
@@ -12,6 +15,17 @@ public class product {
     
     private int productId, productCategory, productPrice;
     private String productName, productDescription;
+    
+    private Connection cnVar;
+    private PreparedStatement psVar;
+    private Statement stVar;
+    private ResultSet rsVar;
+    private String query;
+
+    public product() {
+        koneksi koneksiDB = new koneksi();
+        cnVar = koneksiDB.getConnection();
+    }   
 
     public int getProductId() {
         return productId;
@@ -51,6 +65,20 @@ public class product {
 
     public void setProductDescription(String productDescription) {
         this.productDescription = productDescription;
+    }
+    
+    public ResultSet showProduct(){
+        
+        try {
+            query = "SELECT * FROM product";
+            
+            stVar = cnVar.createStatement();
+            rsVar = stVar.executeQuery(query);
+            
+        } catch (SQLException sQLException) {
+            JOptionPane.showMessageDialog(null, "Error : " + sQLException.getMessage());
+        }
+        return rsVar;
     }
     
 }

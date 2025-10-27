@@ -86,8 +86,18 @@ public class categoryFrame extends javax.swing.JFrame {
         buttonUbah.setText("UBAH");
 
         buttonHapus.setText("HAPUS");
+        buttonHapus.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonHapusActionPerformed(evt);
+            }
+        });
 
         buttonReset.setText("RESET");
+        buttonReset.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonResetActionPerformed(evt);
+            }
+        });
 
         buttonKembali.setText("KEMBALI");
         buttonKembali.addActionListener(new java.awt.event.ActionListener() {
@@ -220,6 +230,24 @@ public class categoryFrame extends javax.swing.JFrame {
         dispose();
         new dashboardFrame().setVisible(true);
     }//GEN-LAST:event_buttonKembaliActionPerformed
+
+    private void buttonResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonResetActionPerformed
+        // TODO add your handling code here:
+        reset();
+    }//GEN-LAST:event_buttonResetActionPerformed
+
+    private void buttonHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonHapusActionPerformed
+        // TODO add your handling code here:
+        category categoryHapus = new category();
+        
+        categoryHapus.setCategoryId(Integer.parseInt(txtIDCategory.getText()));
+        
+        categoryHapus.deleteData();
+        
+        reset();
+        
+        loadData();
+    }//GEN-LAST:event_buttonHapusActionPerformed
 
     /**
      * @param args the command line arguments
