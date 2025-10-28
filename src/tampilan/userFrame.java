@@ -21,7 +21,9 @@ public class userFrame extends javax.swing.JFrame {
     public userFrame() {
         initComponents();
         reset();
-        loadData();
+        // loadData();
+        loadTable();
+
     }
 
     void reset() {
@@ -32,35 +34,66 @@ public class userFrame extends javax.swing.JFrame {
         cbStatus.setSelectedIndex(0);
     }
 
-    void loadData() {
+//    void loadData() {
+//
+//        DefaultTableModel model = new DefaultTableModel();
+//        user userData = new user();
+//
+//        model.addColumn("Username");
+//        model.addColumn("Email");
+//        model.addColumn("Password");
+//        model.addColumn("Full Name");
+//        model.addColumn("Status");
+//
+//        try {
+//            ResultSet rsVar = userData.loadData();
+//
+//            while (rsVar.next()) {
+//                String username = rsVar.getString("userName");
+//                String email = rsVar.getString("userEmail");
+//                String password = rsVar.getString("userPassword");
+//                String fullName = rsVar.getString("userFullName");
+//                byte status = rsVar.getByte("userStatus");
+//
+//                Object data[] = {username, email, password, fullName, status};
+//                model.addRow(data);
+//            }
+//
+//        } catch (SQLException sQLException) {
+//            JOptionPane.showMessageDialog(null, "Error : " + sQLException.getMessage());
+//        }
+//        tableUser.setModel(model);
+//    }
+
+    void loadTable() {
 
         DefaultTableModel model = new DefaultTableModel();
         user userData = new user();
 
         model.addColumn("Username");
         model.addColumn("Email");
-        model.addColumn("Password");
+        
         model.addColumn("Full Name");
         model.addColumn("Status");
 
         try {
+
             ResultSet rsVar = userData.loadData();
 
             while (rsVar.next()) {
-                String username = rsVar.getString("userName");
-                String email = rsVar.getString("userEmail");
-                String password = rsVar.getString("userPassword");
-                String fullName = rsVar.getString("userFullName");
-                byte status = rsVar.getByte("userStatus");
+                String status = (rsVar.getInt("userStatus") == 1) ? "Active" : "Non-Active";
 
-                Object data[] = {username, email, password, fullName, status};
-                model.addRow(data);
+                model.addRow(new Object[]{
+                    rsVar.getString("userName"),
+                    rsVar.getString("userEmail"),
+                    rsVar.getString("userFullName"),
+                    status
+                });
             }
-
+            tableUser.setModel(model);
         } catch (SQLException sQLException) {
             JOptionPane.showMessageDialog(null, "Error : " + sQLException.getMessage());
         }
-        tableUser.setModel(model);
     }
 
     /**
@@ -204,6 +237,11 @@ public class userFrame extends javax.swing.JFrame {
         });
 
         buttonUbah.setText("UBAH");
+        buttonUbah.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonUbahActionPerformed(evt);
+            }
+        });
 
         buttonHapus.setText("HAPUS");
         buttonHapus.addActionListener(new java.awt.event.ActionListener() {
@@ -213,6 +251,11 @@ public class userFrame extends javax.swing.JFrame {
         });
 
         buttonReset.setText("RESET");
+        buttonReset.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonResetActionPerformed(evt);
+            }
+        });
 
         buttonKembali.setText("KEMBALI");
         buttonKembali.addActionListener(new java.awt.event.ActionListener() {
@@ -301,21 +344,26 @@ public class userFrame extends javax.swing.JFrame {
         userTambah.setUserPassword(txtPassword.getText());
         userTambah.setUserFullName(txtFullName.getText());
 
-        String status = cbStatus.getSelectedItem().toString();
-        byte statusByte;
-
-        if (status.equalsIgnoreCase("Active")) {
-            statusByte = 1;
+        if (cbStatus.getSelectedItem() == "Active") {
+            userTambah.setUserStatus(1);
         } else {
-            statusByte = 0;
+            userTambah.setUserStatus(0);
         }
 
-        userTambah.setUserStatus(statusByte);
-
+//        String status = cbStatus.getSelectedItem().toString();
+//        byte statusByte;
+//
+//        if (status.equalsIgnoreCase("Active")) {
+//            statusByte = 1;
+//        } else {
+//            statusByte = 0;
+//        }
+//
+//        userTambah.setUserStatus(statusByte);
         userTambah.saveData();
 
         reset();
-        loadData();
+        loadTable();
     }//GEN-LAST:event_buttonTambahActionPerformed
 
     private void buttonHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonHapusActionPerformed
@@ -332,7 +380,7 @@ public class userFrame extends javax.swing.JFrame {
         userTambah.deleteData();
 
         reset();
-        loadData();
+        loadTable();
     }//GEN-LAST:event_buttonHapusActionPerformed
 
     private void tableUserMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableUserMouseClicked
@@ -341,17 +389,48 @@ public class userFrame extends javax.swing.JFrame {
 
         String username = tableUser.getValueAt(choiceRow, 0).toString();
         String email = tableUser.getValueAt(choiceRow, 1).toString();
-        String password = tableUser.getValueAt(choiceRow, 2).toString();
-        String fullName = tableUser.getValueAt(choiceRow, 3).toString();
-        byte status = Byte.parseByte(tableUser.getValueAt(choiceRow, 4).toString());
+//        String password = tableUser.getValueAt(choiceRow, 2).toString();
+        String fullName = tableUser.getValueAt(choiceRow, 2).toString();
+        String status =tableUser.getValueAt(choiceRow, 3).toString();
 
         txtUsername.setText(username);
         txtEmail.setText(email);
-        txtPassword.setText(password);
+//        txtPassword.setText(password);
         txtFullName.setText(fullName);
         cbStatus.setSelectedItem(status);
 
     }//GEN-LAST:event_tableUserMouseClicked
+
+    private void buttonResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonResetActionPerformed
+        // TODO add your handling code here:
+        reset();
+    }//GEN-LAST:event_buttonResetActionPerformed
+
+    private void buttonUbahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonUbahActionPerformed
+        // TODO add your handling code here:
+        if (txtUsername.getText().isBlank() || txtEmail.getText().isBlank() || txtFullName.getText().isBlank() || (cbStatus.getSelectedItem() == null)) {
+            JOptionPane.showMessageDialog(null, "Harap mengisi data secara keseluruhan");
+            return;
+        }
+
+        user userTambah = new user();
+
+        userTambah.setUserName(txtUsername.getText());
+        userTambah.setUserEmail(txtEmail.getText());
+        userTambah.setUserPassword(txtPassword.getText());
+        userTambah.setUserFullName(txtFullName.getText());
+
+        if (cbStatus.getSelectedItem() == "Active") {
+            userTambah.setUserStatus(1);
+        } else {
+            userTambah.setUserStatus(0);
+        }
+        
+         userTambah.updateData();
+
+        reset();
+        loadTable();
+    }//GEN-LAST:event_buttonUbahActionPerformed
 
     /**
      * @param args the command line arguments

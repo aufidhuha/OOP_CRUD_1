@@ -9,12 +9,12 @@ import javax.swing.JOptionPane;
  *
  * @author ASUS
  */
-public class user {
+public class user extends koneksi {
     
     private String userName, userEmail, userPassword, userFullName;
-    private byte userStatus;
+    private int userStatus;
     
-    private Connection cnVar;
+    private final Connection cnVar;
     private PreparedStatement psVar;
     private Statement stVar;
     private ResultSet rsVar;
@@ -22,8 +22,7 @@ public class user {
 
     
     public user() {
-        koneksi koneksiDB = new koneksi();
-        cnVar = koneksiDB.getConnection();
+        cnVar = super.configDB();
     }    
     
 
@@ -59,11 +58,11 @@ public class user {
         this.userFullName = userFullName;
     }
 
-    public byte getUserStatus() {
+    public int getUserStatus() {
         return userStatus;
     }
 
-    public void setUserStatus(byte userStatus) {
+    public void setUserStatus(int userStatus) {
         this.userStatus = userStatus;
     }
     
@@ -93,10 +92,33 @@ public class user {
             psVar.setString(2, this.userEmail);
             psVar.setString(3, this.userPassword);
             psVar.setString(4, this.userFullName);
-            psVar.setByte(5, this.userStatus);
+            psVar.setInt(5, this.userStatus);
             psVar.executeUpdate();
+            psVar.close();
             
             JOptionPane.showMessageDialog(null, "Data berhasil ditambahkan");
+            
+        } catch (SQLException sQLException) {
+            JOptionPane.showMessageDialog(null, "Error : " + sQLException.getMessage());
+        }
+    }
+    
+    
+    public void updateData(){
+        
+        try {
+            query = "UPDATE user SET userEmail = ?, userPassword = MD5(?), userFullName = ?, userStatus = ? WHERE userName = ?";
+            
+            psVar = cnVar.prepareStatement(query);
+            psVar.setString(1, this.userEmail);
+            psVar.setString(2, this.userPassword);
+            psVar.setString(3, this.userFullName);
+            psVar.setInt(4, this.userStatus);
+            psVar.setString(5, this.userName);
+            psVar.executeUpdate();
+            psVar.close();
+            
+            JOptionPane.showMessageDialog(null, "Data berhasil diubah");
             
         } catch (SQLException sQLException) {
             JOptionPane.showMessageDialog(null, "Error : " + sQLException.getMessage());
@@ -112,6 +134,7 @@ public class user {
             psVar = cnVar.prepareStatement(query);
             psVar.setString(1, this.userName);
             psVar.executeUpdate();
+            psVar.close();
             
             JOptionPane.showMessageDialog(null, "Data berhasil dihapus");
             

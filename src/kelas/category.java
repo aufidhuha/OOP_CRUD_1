@@ -28,7 +28,7 @@ public class category {
     
     public category() {
         koneksi koneksiDB = new koneksi();
-        cnVar = koneksiDB.getConnection();
+        cnVar = koneksiDB.configDB();
     }    
     
     public int getCategoryId() {

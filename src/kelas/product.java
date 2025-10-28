@@ -24,7 +24,7 @@ public class product {
 
     public product() {
         koneksi koneksiDB = new koneksi();
-        cnVar = koneksiDB.getConnection();
+        cnVar = koneksiDB.configDB();
     }   
 
     public int getProductId() {
