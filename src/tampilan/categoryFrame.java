@@ -22,7 +22,7 @@ public class categoryFrame extends javax.swing.JFrame {
     public categoryFrame() {
         initComponents();
         reset();
-        loadData();
+        loadTable();
     }
     
     void reset(){
@@ -30,7 +30,30 @@ public class categoryFrame extends javax.swing.JFrame {
         txtNamaCategory.setText(null);
     }
     
-    void loadData(){
+//    void loadData(){
+//        DefaultTableModel model = new DefaultTableModel();
+//        category categoryData = new category();
+//        
+//        model.addColumn("ID Category");
+//        model.addColumn("Nama Category");
+//        
+//        try {
+//            ResultSet rsVar = categoryData.loadData();
+//            
+//            while (rsVar.next()) {
+//                int id = rsVar.getInt("categoryId");
+//                String nama = rsVar.getString("categoryNama");
+//                
+//                Object data[] = {id, nama};
+//                model.addRow(data);
+//            }
+//        } catch (SQLException sQLException) {
+//            JOptionPane.showMessageDialog(null, "Error : " + sQLException.getMessage());
+//        }
+//        tableCategory.setModel(model);
+//    }
+    
+    void loadTable(){
         DefaultTableModel model = new DefaultTableModel();
         category categoryData = new category();
         
@@ -42,7 +65,7 @@ public class categoryFrame extends javax.swing.JFrame {
             
             while (rsVar.next()) {
                 int id = rsVar.getInt("categoryId");
-                String nama = rsVar.getString("categoryNama");
+                String nama = rsVar.getString("categoryName");
                 
                 Object data[] = {id, nama};
                 model.addRow(data);
@@ -82,8 +105,18 @@ public class categoryFrame extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
         buttonTambah.setText("TAMBAH");
+        buttonTambah.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonTambahActionPerformed(evt);
+            }
+        });
 
         buttonUbah.setText("UBAH");
+        buttonUbah.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonUbahActionPerformed(evt);
+            }
+        });
 
         buttonHapus.setText("HAPUS");
         buttonHapus.addActionListener(new java.awt.event.ActionListener() {
@@ -246,8 +279,26 @@ public class categoryFrame extends javax.swing.JFrame {
         
         reset();
         
-        loadData();
+        loadTable();
     }//GEN-LAST:event_buttonHapusActionPerformed
+
+    private void buttonUbahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonUbahActionPerformed
+        // TODO add your handling code here:
+       
+    }//GEN-LAST:event_buttonUbahActionPerformed
+
+    private void buttonTambahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonTambahActionPerformed
+        // TODO add your handling code here:
+         category categorySave = new category();
+        
+        categorySave.setCategoryName(txtNamaCategory.getText());
+        
+        categorySave.saveData();
+        
+        reset();
+        
+        loadTable();
+    }//GEN-LAST:event_buttonTambahActionPerformed
 
     /**
      * @param args the command line arguments

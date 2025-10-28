@@ -15,7 +15,7 @@ import javax.swing.JOptionPane;
  *
  * @author ASUS
  */
-public class category {
+public class category extends koneksi{
 
     private int categoryId;
     private String categoryName;
@@ -27,8 +27,7 @@ public class category {
     private String query;
     
     public category() {
-        koneksi koneksiDB = new koneksi();
-        cnVar = koneksiDB.configDB();
+        cnVar = configDB();
     }    
     
     public int getCategoryId() {
@@ -66,11 +65,11 @@ public class category {
     public void saveData(){
         
         try {
-            query = "INSERT INTO category VALUES (?, ?)";
+            query = "INSERT INTO category (categoryName) VALUES (?)";
             
             psVar = cnVar.prepareStatement(query);
-            psVar.setInt(1, this.categoryId);
-            psVar.setString(2, this.categoryName);
+        //    psVar.setInt(1, this.categoryId);
+            psVar.setString(1, this.categoryName);
             psVar.executeUpdate();
             
             JOptionPane.showMessageDialog(null, "Data berhasil ditambahkan");
