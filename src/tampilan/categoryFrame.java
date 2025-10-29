@@ -25,8 +25,27 @@ public class categoryFrame extends javax.swing.JFrame {
         loadTable();
     }
     
+    void autoID(){
+        
+        category catID = new category();
+        ResultSet rsVar = catID.autoID();
+        try {
+            
+            if (rsVar.next()) {
+                int id = rsVar.getInt("ID") + 1;
+                txtIDCategory.setText(String.valueOf(id));
+            } else {
+                txtIDCategory.setText("1");
+            }
+            
+        } catch (SQLException sQLException) {
+            JOptionPane.showMessageDialog(null, "Error : " + sQLException.getMessage());
+        }
+    }
+    
     void reset(){
-        txtIDCategory.setText(null);
+        autoID();
+        txtIDCategory.setEditable(false);
         txtNamaCategory.setText(null);
     }
     
@@ -75,7 +94,7 @@ public class categoryFrame extends javax.swing.JFrame {
         }
         tableCategory.setModel(model);
     }
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -196,6 +215,11 @@ public class categoryFrame extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tableCategory.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tableCategoryMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tableCategory);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -284,6 +308,16 @@ public class categoryFrame extends javax.swing.JFrame {
 
     private void buttonUbahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonUbahActionPerformed
         // TODO add your handling code here:
+        category categoryUbah = new category();
+        
+        categoryUbah.setCategoryId(Integer.parseInt(txtIDCategory.getText()));
+        categoryUbah.setCategoryName(txtNamaCategory.getText());
+        
+        categoryUbah.updateData();
+        
+        reset();
+        
+        loadTable();
        
     }//GEN-LAST:event_buttonUbahActionPerformed
 
@@ -291,6 +325,7 @@ public class categoryFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
          category categorySave = new category();
         
+        categorySave.setCategoryId(Integer.parseInt(txtIDCategory.getText()));
         categorySave.setCategoryName(txtNamaCategory.getText());
         
         categorySave.saveData();
@@ -299,6 +334,17 @@ public class categoryFrame extends javax.swing.JFrame {
         
         loadTable();
     }//GEN-LAST:event_buttonTambahActionPerformed
+
+    private void tableCategoryMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableCategoryMouseClicked
+        // TODO add your handling code here:
+        int choiceRow = tableCategory.rowAtPoint(evt.getPoint());
+        
+        String id = tableCategory.getValueAt(choiceRow, 0).toString();
+        String nama = tableCategory.getValueAt(choiceRow, 1).toString();
+        
+        txtIDCategory.setText(id);
+        txtNamaCategory.setText(nama);
+    }//GEN-LAST:event_tableCategoryMouseClicked
 
     /**
      * @param args the command line arguments

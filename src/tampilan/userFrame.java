@@ -413,20 +413,20 @@ public class userFrame extends javax.swing.JFrame {
             return;
         }
 
-        user userTambah = new user();
+        user userUbah = new user();
 
-        userTambah.setUserName(txtUsername.getText());
-        userTambah.setUserEmail(txtEmail.getText());
-        userTambah.setUserPassword(txtPassword.getText());
-        userTambah.setUserFullName(txtFullName.getText());
+        userUbah.setUserName(txtUsername.getText());
+        userUbah.setUserEmail(txtEmail.getText());
+        userUbah.setUserPassword(txtPassword.getText());
+        userUbah.setUserFullName(txtFullName.getText());
 
         if (cbStatus.getSelectedItem() == "Active") {
-            userTambah.setUserStatus(1);
+            userUbah.setUserStatus(1);
         } else {
-            userTambah.setUserStatus(0);
+            userUbah.setUserStatus(0);
         }
         
-         userTambah.updateData();
+         userUbah.updateData();
 
         reset();
         loadTable();

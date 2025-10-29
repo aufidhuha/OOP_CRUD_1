@@ -20,7 +20,7 @@ public class category extends koneksi{
     private int categoryId;
     private String categoryName;
  
-    private Connection cnVar;
+    private final Connection cnVar;
     private PreparedStatement psVar;
     private Statement stVar;
     private ResultSet rsVar;
@@ -65,11 +65,11 @@ public class category extends koneksi{
     public void saveData(){
         
         try {
-            query = "INSERT INTO category (categoryName) VALUES (?)";
+            query = "INSERT INTO category VALUES (?, ?)";
             
             psVar = cnVar.prepareStatement(query);
-        //    psVar.setInt(1, this.categoryId);
-            psVar.setString(1, this.categoryName);
+            psVar.setInt(1, this.categoryId);
+            psVar.setString(2, this.categoryName);
             psVar.executeUpdate();
             
             JOptionPane.showMessageDialog(null, "Data berhasil ditambahkan");
@@ -117,5 +117,44 @@ public class category extends koneksi{
     }
     
     
+    public ResultSet dataComboBox(){
+        try {
+            query = "SELECT categoryName FROM category";
+            
+            stVar = cnVar.createStatement();
+            rsVar = stVar.executeQuery(query);
+        } catch (SQLException sQLException) {
+            JOptionPane.showMessageDialog(null, "Error : " + sQLException.getMessage());
+        }
+        return rsVar;
+    }
+    
+    
+    public ResultSet konversi(){
+        try {
+            query = "SELECT categoryId FROM category WHERE categoryName = ?";
+            
+            psVar = cnVar.prepareStatement(query);
+            psVar.setString(1, this.categoryName);
+            
+            rsVar = psVar.executeQuery();
+        } catch (SQLException sQLException) {
+            JOptionPane.showMessageDialog(null, "Error : " + sQLException.getMessage());
+        }
+        return rsVar;
+    } 
+    
+    
+    public ResultSet autoID(){
+        try {
+            query = "SELECT categoryId AS ID FROM category ORDER BY categoryId DESC LIMIT 1";
+            
+            stVar = cnVar.createStatement();
+            rsVar = stVar.executeQuery(query);
+        } catch (SQLException sQLException) {
+            JOptionPane.showMessageDialog(null, "Error : " + sQLException.getMessage());
+        }
+        return rsVar;
+    }
     
 }

@@ -7,6 +7,7 @@ package tampilan;
 import javax.swing.table.DefaultTableModel;
 import java.sql.*;
 import javax.swing.JOptionPane;
+import kelas.category;
 import kelas.product;
 /**
  *
@@ -20,11 +21,31 @@ public class productFrame extends javax.swing.JFrame {
     public productFrame() {
         initComponents();
         loadData();
+        valueComboBox();
         reset();
     }
     
+    void autoId(){
+        
+        try {
+            product proId = new product();
+            ResultSet rsVar = proId.autoId();
+
+            if (rsVar.next()) {
+                int id = rsVar.getInt("ID") + 1;
+                txtIDProduk.setText(String.valueOf(id));
+            } else {
+                txtIDProduk.setText("1");
+            }
+
+        } catch (SQLException sQLException) {
+            JOptionPane.showMessageDialog(null, "Error : " + sQLException.getMessage());
+        }
+    }
+    
     void reset(){
-        txtIDProduk.setText(null);
+        autoId();
+        txtIDProduk.setEditable(false);
         txtNamaProduk.setText(null);
         txtDeskripsi.setText(null);
         txtHarga.setText(null);
@@ -47,7 +68,7 @@ public class productFrame extends javax.swing.JFrame {
             while (rsVar.next()) {                
                 int id = rsVar.getInt("productId");
                 String name = rsVar.getString("productName");
-                String category = rsVar.getString("productCategory");
+                String category = rsVar.getString("categoryName");
                 String description = rsVar.getString("productDescription");
                 int price = rsVar.getInt("productPrice");
                 
@@ -60,6 +81,24 @@ public class productFrame extends javax.swing.JFrame {
         }
         tablePRoduk.setModel(model);
     }
+    
+    void valueComboBox(){
+        
+        try {
+            category value = new category();
+            ResultSet rsVar = value.dataComboBox();
+
+            while (rsVar.next()) {
+                String data = rsVar.getString("categoryName");
+                cbKategoriProduk.addItem(data);
+            }
+
+        } catch (SQLException sQLException) {
+            JOptionPane.showMessageDialog(null, "Error : " + sQLException.getMessage());
+        }
+    
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -95,10 +134,25 @@ public class productFrame extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
         buttonTambah.setText("TAMBAH");
+        buttonTambah.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonTambahActionPerformed(evt);
+            }
+        });
 
         buttonUbah.setText("UBAH");
+        buttonUbah.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonUbahActionPerformed(evt);
+            }
+        });
 
         buttonHapus.setText("HAPUS");
+        buttonHapus.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonHapusActionPerformed(evt);
+            }
+        });
 
         buttonReset.setText("RESET");
 
@@ -139,8 +193,6 @@ public class productFrame extends javax.swing.JFrame {
 
         txtDeskripsi.setBackground(new java.awt.Color(204, 204, 204));
         txtDeskripsi.setForeground(new java.awt.Color(0, 0, 0));
-
-        cbKategoriProduk.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Active", "Non-Active" }));
 
         txtHarga.setBackground(new java.awt.Color(204, 204, 204));
         txtHarga.setForeground(new java.awt.Color(0, 0, 0));
@@ -201,6 +253,11 @@ public class productFrame extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tablePRoduk.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tablePRodukMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tablePRoduk);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -270,6 +327,97 @@ public class productFrame extends javax.swing.JFrame {
         dispose();
         new dashboardFrame().setVisible(true);
     }//GEN-LAST:event_buttonKembaliActionPerformed
+
+    private void buttonTambahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonTambahActionPerformed
+        // TODO add your handling code here:
+        product productTambah = new product();
+        category categoryTambah = new category();
+        
+        try {
+            productTambah.setProductId(Integer.parseInt(txtIDProduk.getText()));
+            productTambah.setProductName(txtNamaProduk.getText());
+            productTambah.setProductDescription(txtDeskripsi.getText());
+            productTambah.setProductPrice(Integer.parseInt(txtHarga.getText()));
+            
+            categoryTambah.setCategoryName(cbKategoriProduk.getSelectedItem().toString());
+            ResultSet rsVarCek = categoryTambah.konversi();
+            
+            if (rsVarCek.next()) {
+                int id = rsVarCek.getInt("categoryId");
+                productTambah.setProductCategory(id);
+            }
+           
+            productTambah.saveData();
+            
+        } catch (NumberFormatException numberFormatException) {
+            JOptionPane.showMessageDialog(null, "Error : " + numberFormatException.getMessage());
+        } catch (SQLException sQLException) {
+            JOptionPane.showMessageDialog(null, "Error : " + sQLException.getMessage());
+        }
+        
+        reset();
+        loadData();        
+    }//GEN-LAST:event_buttonTambahActionPerformed
+
+    private void buttonHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonHapusActionPerformed
+        // TODO add your handling code here:
+        product productHapus = new product();
+        
+        productHapus.setProductId(Integer.parseInt(txtIDProduk.getText()));
+        
+        productHapus.deleteData();
+        
+        reset();
+        loadData();
+    }//GEN-LAST:event_buttonHapusActionPerformed
+
+    private void buttonUbahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonUbahActionPerformed
+        // TODO add your handling code here:
+        product productTambah = new product();
+        category categoryTambah = new category();
+        
+        try {
+            productTambah.setProductId(Integer.parseInt(txtIDProduk.getText()));
+            productTambah.setProductName(txtNamaProduk.getText());
+            productTambah.setProductDescription(txtDeskripsi.getText());
+            productTambah.setProductPrice(Integer.parseInt(txtHarga.getText()));
+            
+            categoryTambah.setCategoryName(cbKategoriProduk.getSelectedItem().toString());
+            ResultSet rsVarCek = categoryTambah.konversi();
+            
+            if (rsVarCek.next()) {
+                int id = rsVarCek.getInt("categoryId");
+                productTambah.setProductCategory(id);
+            }
+           
+            productTambah.updateData();
+            
+        } catch (NumberFormatException numberFormatException) {
+            JOptionPane.showMessageDialog(null, "Error : " + numberFormatException.getMessage());
+        } catch (SQLException sQLException) {
+            JOptionPane.showMessageDialog(null, "Error : " + sQLException.getMessage());
+        }
+        
+        reset();
+        loadData();    
+    }//GEN-LAST:event_buttonUbahActionPerformed
+
+    private void tablePRodukMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablePRodukMouseClicked
+        // TODO add your handling code here:
+        int choiceRow = tablePRoduk.rowAtPoint(evt.getPoint());
+        
+        String id = tablePRoduk.getValueAt(choiceRow, 0).toString();
+        String nama = tablePRoduk.getValueAt(choiceRow, 1).toString();
+        String category = tablePRoduk.getValueAt(choiceRow, 2).toString();
+        String deskripsi = tablePRoduk.getValueAt(choiceRow, 3).toString();
+        String harga = tablePRoduk.getValueAt(choiceRow, 4).toString();
+        
+        txtIDProduk.setText(id);
+        txtNamaProduk.setText(nama);
+        cbKategoriProduk.setSelectedItem(category);
+        txtDeskripsi.setText(deskripsi);
+        txtHarga.setText(harga);
+    }//GEN-LAST:event_tablePRodukMouseClicked
 
     /**
      * @param args the command line arguments
