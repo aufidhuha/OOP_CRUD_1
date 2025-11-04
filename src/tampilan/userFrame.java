@@ -385,17 +385,16 @@ public class userFrame extends javax.swing.JFrame {
 
     private void tableUserMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableUserMouseClicked
         // TODO add your handling code here:
-        int choiceRow = tableUser.getSelectedRow();
+        int choiceRow = tableUser.rowAtPoint(evt.getPoint());
 
         String username = tableUser.getValueAt(choiceRow, 0).toString();
         String email = tableUser.getValueAt(choiceRow, 1).toString();
-//        String password = tableUser.getValueAt(choiceRow, 2).toString();
         String fullName = tableUser.getValueAt(choiceRow, 2).toString();
         String status =tableUser.getValueAt(choiceRow, 3).toString();
 
         txtUsername.setText(username);
+        txtUsername.setEditable(false);
         txtEmail.setText(email);
-//        txtPassword.setText(password);
         txtFullName.setText(fullName);
         cbStatus.setSelectedItem(status);
 

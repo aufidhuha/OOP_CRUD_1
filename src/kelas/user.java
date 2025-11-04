@@ -165,44 +165,37 @@ public class user extends koneksi {
     }
 
     
-    public boolean loginApp() {
-
-//        Session sesi = new Session();
-
+    public void loginApp(){
         try {
             query = "SELECT * FROM user WHERE userName = ? AND userPassword = MD5(?)";
-
+            
             psVar = cnVar.prepareStatement(query);
             psVar.setString(1, this.userName);
             psVar.setString(2, this.userPassword);
-
             rsVar = psVar.executeQuery();
-
-//            if (rsVar.next()) {
-//                sesi.setStatus("Aktif");
-//                sesi.setNama(rsVar.getString("userFullName"));
-//                sesi.setUserName(rsVar.getString("userName"));
-//                sesi.setEmail(rsVar.getString("userEmail"));
-//            } else {
-//                sesi.setStatus("Tidak Aktif");
-//                JOptionPane.showMessageDialog(null, "Username atau Password salah");
-//            }
-
-            return rsVar.next();
-
+            
+            if (rsVar.next()) {                
+                Session.setUserName(rsVar.getString("userName"));
+                Session.setNama(rsVar.getString("userFullName"));
+                Session.setEmail(rsVar.getString("userEmail"));
+                Session.setStatus("Active");
+                
+            } else {
+                Session.setStatus("Non-Active");
+                JOptionPane.showMessageDialog(null, "Username atau Password salah, silahkan coba lagi");
+            }
+            
         } catch (SQLException sQLException) {
-            JOptionPane.showMessageDialog(null, "Error : " + sQLException.getMessage());
-            return false;
+                JOptionPane.showMessageDialog(null, "Error : " + sQLException.getMessage());
         }
     }
     
-//    public void logOut(){
-//        var sesi = new Session();
-//        
-//        sesi.setStatus("");
-//        sesi.setNama("");
-//        sesi.setUserName("");
-//        sesi.setEmail("");
-//    }
-
+    
+    public void logoutApp(){
+        Session.setUserName("");
+        Session.setEmail("");
+        Session.setNama("");
+        Session.setStatus("");
+    }
+    
 }

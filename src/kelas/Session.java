@@ -10,40 +10,39 @@ package kelas;
  */
 public class Session {
     
-    private String userName, nama, email, status;
+    private static String userName, nama, email, status;
 
-    public String getUserName() {
+    public static String getUserName() {
         return userName;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public static void setUserName(String userName) {
+        Session.userName = userName;
     }
 
-    public String getNama() {
+    public static String getNama() {
         return nama;
     }
 
-    public void setNama(String nama) {
-        this.nama = nama;
+    public static void setNama(String nama) {
+        Session.nama = nama;
     }
 
-    public String getEmail() {
+    public static String getEmail() {
         return email;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public static void setEmail(String email) {
+        Session.email = email;
     }
 
-    public String getStatus() {
+    public static String getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
+    public static void setStatus(String status) {
+        Session.status = status;
     }
-    
     
     
 }

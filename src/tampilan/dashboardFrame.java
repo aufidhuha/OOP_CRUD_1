@@ -5,7 +5,7 @@
 package tampilan;
 
 import kelas.Session;
-
+import kelas.user;
 /**
  *
  * @author ASUS
@@ -17,16 +17,14 @@ public class dashboardFrame extends javax.swing.JFrame {
      */
     public dashboardFrame() {
         initComponents();
-//        sesiApp();
+        sesiApp();
     }
     
-//    void sesiApp(){
-//        Session sesi = new Session();
-//        
-//        labelUSername.setText("Username  :\t" + sesi.getUserName());
-//        labelEmail.setText("Email   :\t" + sesi.getEmail());
-//        labelNama.setText("Nama User   :\t" + sesi.getNama());
-//    }
+    void sesiApp(){        
+        labelUSername.setText("Username  :\t" + Session.getUserName());
+        labelEmail.setText("Email   :\t" + Session.getEmail());
+        labelNama.setText("Nama User   :\t" + Session.getNama());
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -60,7 +58,7 @@ public class dashboardFrame extends javax.swing.JFrame {
         labelEmail.setText("EMAIL          : ");
 
         labelNama.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        labelNama.setText("NAMA          : ");
+        labelNama.setText("FULL NAME : ");
 
         jMenu1.setText("File");
 
@@ -145,8 +143,12 @@ public class dashboardFrame extends javax.swing.JFrame {
 
     private void miLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miLogoutActionPerformed
         // TODO add your handling code here:
+        user userLogOut = new user();
+        userLogOut.logoutApp();
+        
         dispose();
         new loginFrame().setVisible(true);
+        
     }//GEN-LAST:event_miLogoutActionPerformed
 
     private void mProductMenuSelected(javax.swing.event.MenuEvent evt) {//GEN-FIRST:event_mProductMenuSelected
