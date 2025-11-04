@@ -164,7 +164,10 @@ public class user extends koneksi {
         }
     }
 
+    
     public boolean loginApp() {
+
+//        Session sesi = new Session();
 
         try {
             query = "SELECT * FROM user WHERE userName = ? AND userPassword = MD5(?)";
@@ -175,6 +178,16 @@ public class user extends koneksi {
 
             rsVar = psVar.executeQuery();
 
+//            if (rsVar.next()) {
+//                sesi.setStatus("Aktif");
+//                sesi.setNama(rsVar.getString("userFullName"));
+//                sesi.setUserName(rsVar.getString("userName"));
+//                sesi.setEmail(rsVar.getString("userEmail"));
+//            } else {
+//                sesi.setStatus("Tidak Aktif");
+//                JOptionPane.showMessageDialog(null, "Username atau Password salah");
+//            }
+
             return rsVar.next();
 
         } catch (SQLException sQLException) {
@@ -182,5 +195,14 @@ public class user extends koneksi {
             return false;
         }
     }
+    
+//    public void logOut(){
+//        var sesi = new Session();
+//        
+//        sesi.setStatus("");
+//        sesi.setNama("");
+//        sesi.setUserName("");
+//        sesi.setEmail("");
+//    }
 
 }

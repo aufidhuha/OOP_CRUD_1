@@ -3,8 +3,11 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package tampilan;
+
 import javax.swing.JOptionPane;
+import kelas.Session;
 import kelas.user;
+
 /**
  *
  * @author ASUS
@@ -118,17 +121,18 @@ public class loginFrame extends javax.swing.JFrame {
         if (txtUsername.getText().isBlank() || txtPassword.getText().isBlank()) {
             JOptionPane.showMessageDialog(null, "Username dan Password tidak boleh kosong");
         } else {
+            
             userLog.setUserName(txtUsername.getText());
             userLog.setUserPassword(txtPassword.getText());
+            boolean success = userLog.loginApp();            
             
-            boolean loginSuccess = userLog.loginApp();
-            
-            if (loginSuccess) {
-        dispose();
-        new dashboardFrame().setVisible(true);
+            if (success) {
+                dispose();
+                new dashboardFrame().setVisible(true);
                 
             } else {
-            JOptionPane.showMessageDialog(null, "Username atau Password salah, Silahkan coba lagi");
+                JOptionPane.showMessageDialog(null, "Username atau Password salah, Silahkan coba lagi");
+                
             }
         }
         

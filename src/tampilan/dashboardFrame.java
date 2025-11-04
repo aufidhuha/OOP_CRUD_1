@@ -4,6 +4,8 @@
  */
 package tampilan;
 
+import kelas.Session;
+
 /**
  *
  * @author ASUS
@@ -15,7 +17,16 @@ public class dashboardFrame extends javax.swing.JFrame {
      */
     public dashboardFrame() {
         initComponents();
+//        sesiApp();
     }
+    
+//    void sesiApp(){
+//        Session sesi = new Session();
+//        
+//        labelUSername.setText("Username  :\t" + sesi.getUserName());
+//        labelEmail.setText("Email   :\t" + sesi.getEmail());
+//        labelNama.setText("Nama User   :\t" + sesi.getNama());
+//    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -27,9 +38,9 @@ public class dashboardFrame extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
+        labelUSername = new javax.swing.JLabel();
+        labelEmail = new javax.swing.JLabel();
+        labelNama = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         miLogout = new javax.swing.JMenuItem();
@@ -42,14 +53,14 @@ public class dashboardFrame extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel1.setText("SELAMAT DATANG DI APLIKASI");
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel2.setText("USERNAME : ");
+        labelUSername.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        labelUSername.setText("USERNAME : ");
 
-        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel3.setText("EMAIL          : ");
+        labelEmail.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        labelEmail.setText("EMAIL          : ");
 
-        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel4.setText("NAMA          : ");
+        labelNama.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        labelNama.setText("NAMA          : ");
 
         jMenu1.setText("File");
 
@@ -109,9 +120,9 @@ public class dashboardFrame extends javax.swing.JFrame {
                 .addGap(266, 266, 266)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel4))
+                    .addComponent(labelUSername)
+                    .addComponent(labelEmail)
+                    .addComponent(labelNama))
                 .addContainerGap(266, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -120,11 +131,11 @@ public class dashboardFrame extends javax.swing.JFrame {
                 .addGap(110, 110, 110)
                 .addComponent(jLabel1)
                 .addGap(44, 44, 44)
-                .addComponent(jLabel2)
+                .addComponent(labelUSername)
                 .addGap(26, 26, 26)
-                .addComponent(jLabel3)
+                .addComponent(labelEmail)
                 .addGap(26, 26, 26)
-                .addComponent(jLabel4)
+                .addComponent(labelNama)
                 .addContainerGap(205, Short.MAX_VALUE))
         );
 
@@ -194,11 +205,11 @@ public class dashboardFrame extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JLabel labelEmail;
+    private javax.swing.JLabel labelNama;
+    private javax.swing.JLabel labelUSername;
     private javax.swing.JMenu mProduct;
     private javax.swing.JMenu miCategory;
     private javax.swing.JMenuItem miLogout;
