@@ -4,11 +4,14 @@
  */
 package tampilan;
 
+import com.formdev.flatlaf.FlatLightLaf;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.table.DefaultTableModel;
-import kelas.category;
+import kelas.categoryClass;
 
 /**
  *
@@ -17,7 +20,7 @@ import kelas.category;
 public class categoryFrame extends javax.swing.JFrame {
 
     /**
-     * Creates new form category
+     * Creates new form categoryClass
      */
     public categoryFrame() {
         initComponents();
@@ -27,7 +30,7 @@ public class categoryFrame extends javax.swing.JFrame {
     
     void autoID(){
         
-        category catID = new category();
+        categoryClass catID = new categoryClass();
         ResultSet rsVar = catID.autoID();
         try {
             
@@ -51,7 +54,7 @@ public class categoryFrame extends javax.swing.JFrame {
     
 //    void loadData(){
 //        DefaultTableModel model = new DefaultTableModel();
-//        category categoryData = new category();
+//        categoryClass categoryData = new categoryClass();
 //        
 //        model.addColumn("ID Category");
 //        model.addColumn("Nama Category");
@@ -74,7 +77,7 @@ public class categoryFrame extends javax.swing.JFrame {
     
     void loadTable(){
         DefaultTableModel model = new DefaultTableModel();
-        category categoryData = new category();
+        categoryClass categoryData = new categoryClass();
         
         model.addColumn("ID Category");
         model.addColumn("Nama Category");
@@ -120,38 +123,64 @@ public class categoryFrame extends javax.swing.JFrame {
         tableCategory = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setUndecorated(true);
 
-        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setBackground(new java.awt.Color(46, 46, 56));
 
+        buttonTambah.setBackground(new java.awt.Color(76, 175, 80));
+        buttonTambah.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        buttonTambah.setForeground(new java.awt.Color(255, 255, 255));
+        buttonTambah.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8-save-20.png"))); // NOI18N
         buttonTambah.setText("TAMBAH");
+        buttonTambah.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         buttonTambah.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonTambahActionPerformed(evt);
             }
         });
 
+        buttonUbah.setBackground(new java.awt.Color(33, 150, 243));
+        buttonUbah.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        buttonUbah.setForeground(new java.awt.Color(255, 255, 255));
+        buttonUbah.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8-edit-20.png"))); // NOI18N
         buttonUbah.setText("UBAH");
+        buttonUbah.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         buttonUbah.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonUbahActionPerformed(evt);
             }
         });
 
+        buttonHapus.setBackground(new java.awt.Color(244, 67, 54));
+        buttonHapus.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        buttonHapus.setForeground(new java.awt.Color(255, 255, 255));
+        buttonHapus.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8-delete-20.png"))); // NOI18N
         buttonHapus.setText("HAPUS");
+        buttonHapus.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         buttonHapus.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonHapusActionPerformed(evt);
             }
         });
 
+        buttonReset.setBackground(new java.awt.Color(255, 152, 0));
+        buttonReset.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        buttonReset.setForeground(new java.awt.Color(255, 255, 255));
+        buttonReset.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8-reset2-20.png"))); // NOI18N
         buttonReset.setText("RESET");
+        buttonReset.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         buttonReset.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonResetActionPerformed(evt);
             }
         });
 
+        buttonKembali.setBackground(new java.awt.Color(158, 158, 158));
+        buttonKembali.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        buttonKembali.setForeground(new java.awt.Color(255, 255, 255));
+        buttonKembali.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8-logout-20.png"))); // NOI18N
         buttonKembali.setText("KEMBALI");
+        buttonKembali.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         buttonKembali.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonKembaliActionPerformed(evt);
@@ -159,23 +188,27 @@ public class categoryFrame extends javax.swing.JFrame {
         });
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("CATEGORY");
 
-        jPanel3.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel3.setBackground(new java.awt.Color(58, 58, 58));
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
-        jLabel7.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("ID CATEGORY");
 
-        jLabel8.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setText("NAMA CATEGORY");
 
-        txtIDCategory.setBackground(new java.awt.Color(204, 204, 204));
+        txtIDCategory.setBackground(new java.awt.Color(255, 255, 255));
         txtIDCategory.setForeground(new java.awt.Color(0, 0, 0));
+        txtIDCategory.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 10, 1, 1));
 
-        txtNamaCategory.setBackground(new java.awt.Color(204, 204, 204));
+        txtNamaCategory.setBackground(new java.awt.Color(255, 255, 255));
         txtNamaCategory.setForeground(new java.awt.Color(0, 0, 0));
+        txtNamaCategory.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 10, 1, 1));
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -201,9 +234,11 @@ public class categoryFrame extends javax.swing.JFrame {
                 .addComponent(jLabel8)
                 .addGap(13, 13, 13)
                 .addComponent(txtNamaCategory, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(241, Short.MAX_VALUE))
+                .addContainerGap(249, Short.MAX_VALUE))
         );
 
+        tableCategory.setBackground(new java.awt.Color(255, 255, 255));
+        tableCategory.setForeground(new java.awt.Color(0, 0, 0));
         tableCategory.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -229,23 +264,22 @@ public class categoryFrame extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(47, 47, 47)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(53, 53, 53)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 553, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(buttonTambah)
+                                .addComponent(buttonTambah, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(buttonUbah)
+                                .addComponent(buttonUbah, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(buttonHapus)
+                                .addComponent(buttonHapus, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(buttonReset)
-                                .addGap(18, 18, 18)
-                                .addComponent(buttonKembali))
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 553, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(jLabel1))
-                .addContainerGap(40, Short.MAX_VALUE))
+                                .addComponent(buttonReset, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addComponent(buttonKembali, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(72, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -253,18 +287,18 @@ public class categoryFrame extends javax.swing.JFrame {
                 .addGap(40, 40, 40)
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(buttonTambah)
-                            .addComponent(buttonUbah)
-                            .addComponent(buttonHapus)
-                            .addComponent(buttonReset)
-                            .addComponent(buttonKembali))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 336, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(buttonTambah, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(buttonUbah, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(buttonHapus, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(buttonReset, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 361, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(40, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(buttonKembali, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(29, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -295,7 +329,7 @@ public class categoryFrame extends javax.swing.JFrame {
 
     private void buttonHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonHapusActionPerformed
         // TODO add your handling code here:
-        category categoryHapus = new category();
+        categoryClass categoryHapus = new categoryClass();
         
         categoryHapus.setCategoryId(Integer.parseInt(txtIDCategory.getText()));
         
@@ -308,7 +342,7 @@ public class categoryFrame extends javax.swing.JFrame {
 
     private void buttonUbahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonUbahActionPerformed
         // TODO add your handling code here:
-        category categoryUbah = new category();
+        categoryClass categoryUbah = new categoryClass();
         
         categoryUbah.setCategoryId(Integer.parseInt(txtIDCategory.getText()));
         categoryUbah.setCategoryName(txtNamaCategory.getText());
@@ -323,7 +357,7 @@ public class categoryFrame extends javax.swing.JFrame {
 
     private void buttonTambahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonTambahActionPerformed
         // TODO add your handling code here:
-         category categorySave = new category();
+         categoryClass categorySave = new categoryClass();
         
         categorySave.setCategoryId(Integer.parseInt(txtIDCategory.getText()));
         categorySave.setCategoryName(txtNamaCategory.getText());
@@ -355,7 +389,7 @@ public class categoryFrame extends javax.swing.JFrame {
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
-        try {
+       try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
@@ -363,13 +397,13 @@ public class categoryFrame extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(categoryFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(productFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(categoryFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(productFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(categoryFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(productFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(categoryFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(productFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
         //</editor-fold>

@@ -13,7 +13,7 @@ import javax.swing.JOptionPane;
  *
  * @author ASUS
  */
-public class koneksi {
+public class koneksiClass {
 
 //    private Connection cnVar;
 //

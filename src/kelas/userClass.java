@@ -11,7 +11,7 @@ import javax.swing.JOptionPane;
  *
  * @author ASUS
  */
-public class user extends koneksi {
+public class userClass extends koneksiClass {
 
     private String userName, userEmail, userPassword, userFullName;
     private int userStatus;
@@ -22,7 +22,7 @@ public class user extends koneksi {
     private ResultSet rsVar;
     private String query;
 
-    public user() {
+    public userClass() {
         cnVar = super.configDB();
     }
 
@@ -175,13 +175,13 @@ public class user extends koneksi {
             rsVar = psVar.executeQuery();
             
             if (rsVar.next()) {                
-                Session.setUserName(rsVar.getString("userName"));
-                Session.setNama(rsVar.getString("userFullName"));
-                Session.setEmail(rsVar.getString("userEmail"));
-                Session.setStatus("Active");
+                sessionClass.setUserName(rsVar.getString("userName"));
+                sessionClass.setNama(rsVar.getString("userFullName"));
+                sessionClass.setEmail(rsVar.getString("userEmail"));
+                sessionClass.setStatus("Active");
                 
             } else {
-                Session.setStatus("Non-Active");
+                sessionClass.setStatus("Non-Active");
                 JOptionPane.showMessageDialog(null, "Username atau Password salah, silahkan coba lagi");
             }
             
@@ -192,10 +192,10 @@ public class user extends koneksi {
     
     
     public void logoutApp(){
-        Session.setUserName("");
-        Session.setEmail("");
-        Session.setNama("");
-        Session.setStatus("");
+        sessionClass.setUserName("");
+        sessionClass.setEmail("");
+        sessionClass.setNama("");
+        sessionClass.setStatus("");
     }
     
 }

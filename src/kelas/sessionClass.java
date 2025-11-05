@@ -8,7 +8,7 @@ package kelas;
  *
  * @author ASUS
  */
-public class Session {
+public class sessionClass {
     
     private static String userName, nama, email, status;
 
@@ -17,7 +17,7 @@ public class Session {
     }
 
     public static void setUserName(String userName) {
-        Session.userName = userName;
+        sessionClass.userName = userName;
     }
 
     public static String getNama() {
@@ -25,7 +25,7 @@ public class Session {
     }
 
     public static void setNama(String nama) {
-        Session.nama = nama;
+        sessionClass.nama = nama;
     }
 
     public static String getEmail() {
@@ -33,7 +33,7 @@ public class Session {
     }
 
     public static void setEmail(String email) {
-        Session.email = email;
+        sessionClass.email = email;
     }
 
     public static String getStatus() {
@@ -41,7 +41,7 @@ public class Session {
     }
 
     public static void setStatus(String status) {
-        Session.status = status;
+        sessionClass.status = status;
     }
     
     

@@ -15,7 +15,7 @@ import javax.swing.JOptionPane;
  *
  * @author ASUS
  */
-public class category extends koneksi{
+public class categoryClass extends koneksiClass{
 
     private int categoryId;
     private String categoryName;
@@ -26,7 +26,7 @@ public class category extends koneksi{
     private ResultSet rsVar;
     private String query;
     
-    public category() {
+    public categoryClass() {
         cnVar = configDB();
     }    
     

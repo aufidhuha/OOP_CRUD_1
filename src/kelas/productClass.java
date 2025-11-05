@@ -11,7 +11,7 @@ import javax.swing.JOptionPane;
  *
  * @author ASUS
  */
-public class product extends koneksi {
+public class productClass extends koneksiClass {
     
     private int productId, productCategory, productPrice;
     private String productName, productDescription;
@@ -22,7 +22,7 @@ public class product extends koneksi {
     private ResultSet rsVar;
     private String query;
 
-    public product() {
+    public productClass() {
         cnVar = configDB();
     }   
 
