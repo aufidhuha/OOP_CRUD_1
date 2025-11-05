@@ -310,7 +310,7 @@ public class userFrame extends javax.swing.JFrame {
             }
         });
 
-        buttonKembali.setBackground(new java.awt.Color(158, 158, 158));
+        buttonKembali.setBackground(new java.awt.Color(102, 102, 102));
         buttonKembali.setForeground(new java.awt.Color(255, 255, 255));
         buttonKembali.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8-logout-20.png"))); // NOI18N
         buttonKembali.setText("KEMBALI");

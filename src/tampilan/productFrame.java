@@ -177,7 +177,7 @@ public class productFrame extends javax.swing.JFrame {
         buttonReset.setText("RESET");
         buttonReset.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
 
-        buttonKembali.setBackground(new java.awt.Color(158, 158, 158));
+        buttonKembali.setBackground(new java.awt.Color(102, 102, 102));
         buttonKembali.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         buttonKembali.setForeground(new java.awt.Color(255, 255, 255));
         buttonKembali.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8-logout-20.png"))); // NOI18N
