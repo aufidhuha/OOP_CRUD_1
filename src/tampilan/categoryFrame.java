@@ -52,29 +52,6 @@ public class categoryFrame extends javax.swing.JFrame {
         txtNamaCategory.setText(null);
     }
     
-//    void loadData(){
-//        DefaultTableModel model = new DefaultTableModel();
-//        categoryClass categoryData = new categoryClass();
-//        
-//        model.addColumn("ID Category");
-//        model.addColumn("Nama Category");
-//        
-//        try {
-//            ResultSet rsVar = categoryData.loadData();
-//            
-//            while (rsVar.next()) {
-//                int id = rsVar.getInt("categoryId");
-//                String nama = rsVar.getString("categoryNama");
-//                
-//                Object data[] = {id, nama};
-//                model.addRow(data);
-//            }
-//        } catch (SQLException sQLException) {
-//            JOptionPane.showMessageDialog(null, "Error : " + sQLException.getMessage());
-//        }
-//        tableCategory.setModel(model);
-//    }
-    
     void loadTable(){
         DefaultTableModel model = new DefaultTableModel();
         categoryClass categoryData = new categoryClass();
