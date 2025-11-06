@@ -49,7 +49,7 @@ public class productFrame extends javax.swing.JFrame {
         txtNamaProduk.setText(null);
         txtDeskripsi.setText(null);
         txtHarga.setText(null);
-        cbKategoriProduk.setSelectedIndex(0);
+        cbKategoriProduk.setSelectedItem(null);
     }
     
     void loadData(){
@@ -176,6 +176,11 @@ public class productFrame extends javax.swing.JFrame {
         buttonReset.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8-reset2-20.png"))); // NOI18N
         buttonReset.setText("RESET");
         buttonReset.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        buttonReset.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonResetActionPerformed(evt);
+            }
+        });
 
         buttonKembali.setBackground(new java.awt.Color(102, 102, 102));
         buttonKembali.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -451,6 +456,11 @@ public class productFrame extends javax.swing.JFrame {
         txtDeskripsi.setText(deskripsi);
         txtHarga.setText(harga);
     }//GEN-LAST:event_tablePRodukMouseClicked
+
+    private void buttonResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonResetActionPerformed
+        // TODO add your handling code here:
+        reset();
+    }//GEN-LAST:event_buttonResetActionPerformed
 
     /**
      * @param args the command line arguments
