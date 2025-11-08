@@ -24,7 +24,6 @@ public class userFrame extends javax.swing.JFrame {
     public userFrame() {
         initComponents();
         reset();
-        // loadData();
         loadTable();
 
     }
@@ -75,12 +74,10 @@ public class userFrame extends javax.swing.JFrame {
 
         model.addColumn("Username");
         model.addColumn("Email");
-        
         model.addColumn("Full Name");
         model.addColumn("Status");
 
         try {
-
             ResultSet rsVar = userData.loadData();
 
             while (rsVar.next()) {
@@ -418,11 +415,11 @@ public class userFrame extends javax.swing.JFrame {
             return;
         }
 
-        userClass userTambah = new userClass();
+        userClass userHapus = new userClass();
 
-        userTambah.setUserName(txtUsername.getText());
+        userHapus.setUserName(txtUsername.getText());
 
-        userTambah.deleteData();
+        userHapus.deleteData();
 
         reset();
         loadTable();
@@ -486,20 +483,8 @@ public class userFrame extends javax.swing.JFrame {
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
         try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(productFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(productFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(productFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(productFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            UIManager.setLookAndFeel(new FlatLightLaf());
+        } catch (UnsupportedLookAndFeelException unsupportedLookAndFeelException) {
         }
         //</editor-fold>
         //</editor-fold>

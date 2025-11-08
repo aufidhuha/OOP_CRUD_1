@@ -53,8 +53,8 @@ public class dashboardFrame extends javax.swing.JFrame {
         jMenu1 = new javax.swing.JMenu();
         miLogout = new javax.swing.JMenuItem();
         mProduct = new javax.swing.JMenu();
-        miCategory = new javax.swing.JMenu();
-        miUser = new javax.swing.JMenu();
+        mCategory = new javax.swing.JMenu();
+        mUser = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -177,31 +177,31 @@ public class dashboardFrame extends javax.swing.JFrame {
         });
         jMenuBar1.add(mProduct);
 
-        miCategory.setBackground(new java.awt.Color(255, 255, 255));
-        miCategory.setForeground(new java.awt.Color(0, 0, 0));
-        miCategory.setText("Category");
-        miCategory.addMenuListener(new javax.swing.event.MenuListener() {
+        mCategory.setBackground(new java.awt.Color(255, 255, 255));
+        mCategory.setForeground(new java.awt.Color(0, 0, 0));
+        mCategory.setText("Category");
+        mCategory.addMenuListener(new javax.swing.event.MenuListener() {
             public void menuCanceled(javax.swing.event.MenuEvent evt) {
             }
             public void menuDeselected(javax.swing.event.MenuEvent evt) {
             }
             public void menuSelected(javax.swing.event.MenuEvent evt) {
-                miCategoryMenuSelected(evt);
+                mCategoryMenuSelected(evt);
             }
         });
-        jMenuBar1.add(miCategory);
+        jMenuBar1.add(mCategory);
 
-        miUser.setText("User");
-        miUser.addMenuListener(new javax.swing.event.MenuListener() {
+        mUser.setText("User");
+        mUser.addMenuListener(new javax.swing.event.MenuListener() {
             public void menuCanceled(javax.swing.event.MenuEvent evt) {
             }
             public void menuDeselected(javax.swing.event.MenuEvent evt) {
             }
             public void menuSelected(javax.swing.event.MenuEvent evt) {
-                miUserMenuSelected(evt);
+                mUserMenuSelected(evt);
             }
         });
-        jMenuBar1.add(miUser);
+        jMenuBar1.add(mUser);
 
         setJMenuBar(jMenuBar1);
 
@@ -232,21 +232,24 @@ public class dashboardFrame extends javax.swing.JFrame {
 
     private void mProductMenuSelected(javax.swing.event.MenuEvent evt) {//GEN-FIRST:event_mProductMenuSelected
         // TODO add your handling code here:
+        if (!isVisible()) return;
         dispose();
         new productFrame().setVisible(true);
     }//GEN-LAST:event_mProductMenuSelected
 
-    private void miCategoryMenuSelected(javax.swing.event.MenuEvent evt) {//GEN-FIRST:event_miCategoryMenuSelected
+    private void mCategoryMenuSelected(javax.swing.event.MenuEvent evt) {//GEN-FIRST:event_mCategoryMenuSelected
         // TODO add your handling code here:
+        if (!isVisible()) return;
         dispose();
         new categoryFrame().setVisible(true);
-    }//GEN-LAST:event_miCategoryMenuSelected
+    }//GEN-LAST:event_mCategoryMenuSelected
 
-    private void miUserMenuSelected(javax.swing.event.MenuEvent evt) {//GEN-FIRST:event_miUserMenuSelected
+    private void mUserMenuSelected(javax.swing.event.MenuEvent evt) {//GEN-FIRST:event_mUserMenuSelected
         // TODO add your handling code here:
+        if (!isVisible()) return;
         dispose();
         new userFrame().setVisible(true);
-    }//GEN-LAST:event_miUserMenuSelected
+    }//GEN-LAST:event_mUserMenuSelected
 
     /**
      * @param args the command line arguments
@@ -257,22 +260,28 @@ public class dashboardFrame extends javax.swing.JFrame {
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
+        
         try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(productFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(productFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(productFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(productFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            UIManager.setLookAndFeel(new FlatLightLaf());
+        } catch (UnsupportedLookAndFeelException unsupportedLookAndFeelException) {
         }
+        
+//        try {
+//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+//                if ("Nimbus".equals(info.getName())) {
+//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+//                    break;
+//                }
+//            }
+//        } catch (ClassNotFoundException ex) {
+//            java.util.logging.Logger.getLogger(productFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (InstantiationException ex) {
+//            java.util.logging.Logger.getLogger(productFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (IllegalAccessException ex) {
+//            java.util.logging.Logger.getLogger(productFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+//            java.util.logging.Logger.getLogger(productFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        }
         //</editor-fold>
         //</editor-fold>
 
@@ -298,9 +307,9 @@ public class dashboardFrame extends javax.swing.JFrame {
     private javax.swing.JLabel labelEmail;
     private javax.swing.JLabel labelNama;
     private javax.swing.JLabel labelUSername;
+    private javax.swing.JMenu mCategory;
     private javax.swing.JMenu mProduct;
-    private javax.swing.JMenu miCategory;
+    private javax.swing.JMenu mUser;
     private javax.swing.JMenuItem miLogout;
-    private javax.swing.JMenu miUser;
     // End of variables declaration//GEN-END:variables
 }

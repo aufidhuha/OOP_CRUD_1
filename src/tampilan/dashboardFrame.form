@@ -35,7 +35,7 @@
             <EventHandler event="menuSelected" listener="javax.swing.event.MenuListener" parameters="javax.swing.event.MenuEvent" handler="mProductMenuSelected"/>
           </Events>
         </Menu>
-        <Menu class="javax.swing.JMenu" name="miCategory">
+        <Menu class="javax.swing.JMenu" name="mCategory">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
@@ -46,15 +46,15 @@
             <Property name="text" type="java.lang.String" value="Category"/>
           </Properties>
           <Events>
-            <EventHandler event="menuSelected" listener="javax.swing.event.MenuListener" parameters="javax.swing.event.MenuEvent" handler="miCategoryMenuSelected"/>
+            <EventHandler event="menuSelected" listener="javax.swing.event.MenuListener" parameters="javax.swing.event.MenuEvent" handler="mCategoryMenuSelected"/>
           </Events>
         </Menu>
-        <Menu class="javax.swing.JMenu" name="miUser">
+        <Menu class="javax.swing.JMenu" name="mUser">
           <Properties>
             <Property name="text" type="java.lang.String" value="User"/>
           </Properties>
           <Events>
-            <EventHandler event="menuSelected" listener="javax.swing.event.MenuListener" parameters="javax.swing.event.MenuEvent" handler="miUserMenuSelected"/>
+            <EventHandler event="menuSelected" listener="javax.swing.event.MenuListener" parameters="javax.swing.event.MenuEvent" handler="mUserMenuSelected"/>
           </Events>
         </Menu>
       </SubComponents>
