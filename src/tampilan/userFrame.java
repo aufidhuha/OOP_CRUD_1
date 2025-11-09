@@ -410,7 +410,7 @@ public class userFrame extends javax.swing.JFrame {
 
     private void buttonHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonHapusActionPerformed
         // TODO add your handling code here:
-        if (txtUsername.getText().isBlank() || txtEmail.getText().isBlank() || txtPassword.getText().isBlank() || txtFullName.getText().isBlank() || (cbStatus.getSelectedItem() == null)) {
+        if (txtUsername.getText().isBlank() || txtEmail.getText().isBlank() || txtFullName.getText().isBlank() || (cbStatus.getSelectedItem() == null)) {
             JOptionPane.showMessageDialog(null, "Harap memilih data yang ingin dihapus");
             return;
         }
