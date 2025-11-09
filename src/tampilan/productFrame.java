@@ -414,24 +414,24 @@ public class productFrame extends javax.swing.JFrame {
 
     private void buttonUbahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonUbahActionPerformed
         // TODO add your handling code here:
-        productClass productTambah = new productClass();
-        categoryClass categoryTambah = new categoryClass();
+        productClass productUbah = new productClass();
+        categoryClass categoryUbah = new categoryClass();
         
         try {
-            productTambah.setProductId(Integer.parseInt(txtIDProduk.getText()));
-            productTambah.setProductName(txtNamaProduk.getText());
-            productTambah.setProductDescription(txtDeskripsi.getText());
-            productTambah.setProductPrice(Integer.parseInt(txtHarga.getText()));
+            productUbah.setProductId(Integer.parseInt(txtIDProduk.getText()));
+            productUbah.setProductName(txtNamaProduk.getText());
+            productUbah.setProductDescription(txtDeskripsi.getText());
+            productUbah.setProductPrice(Integer.parseInt(txtHarga.getText()));
             
-            categoryTambah.setCategoryName(cbKategoriProduk.getSelectedItem().toString());
-            ResultSet rsVarCek = categoryTambah.konversi();
+            categoryUbah.setCategoryName(cbKategoriProduk.getSelectedItem().toString());
+            ResultSet rsVarCek = categoryUbah.konversi();
             
             if (rsVarCek.next()) {
                 int id = rsVarCek.getInt("categoryId");
-                productTambah.setProductCategory(id);
+                productUbah.setProductCategory(id);
             }
            
-            productTambah.updateData();
+            productUbah.updateData();
             
         } catch (NumberFormatException numberFormatException) {
             JOptionPane.showMessageDialog(null, "Error : " + numberFormatException.getMessage());
