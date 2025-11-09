@@ -69,7 +69,7 @@ public class productClass extends koneksiClass {
     public ResultSet showProduct(){
         
         try {
-            query = "SELECT product.productId, product.productName, category.categoryName, product.productDescription, product.productPrice FROM product JOIN category ON product.productCategory = category.categoryId";
+            query = "SELECT product.productId, product.productName, category.categoryName, product.productDescription, product.productPrice FROM product JOIN category ON product.productCategory = category.categoryId ORDER BY product.productId ASC";
             
             stVar = cnVar.createStatement();
             rsVar = stVar.executeQuery(query);
