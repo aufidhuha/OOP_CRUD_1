@@ -21,8 +21,8 @@ public class koneksiClass {
         
         try {
             String url = "jdbc:mysql://localhost:3306/crudoop_202457201015";
-            String user = "root";
-            String pass = "";
+            String user = "servercrudoop";
+            String pass = "terusbelajar";
             mysqlConfig = DriverManager.getConnection(url, user, pass);
             
         } catch (SQLException sQLException) {
